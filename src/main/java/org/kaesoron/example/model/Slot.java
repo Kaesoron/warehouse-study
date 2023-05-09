@@ -1,47 +1,26 @@
 package org.kaesoron.example.model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "slots")
 public class Slot {
+    @Id
+    @GeneratedValue
     private long slotId;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Shelf shelf;
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "commodities")
     private Commodity commodity;
+    @NotBlank
     private boolean isEmpty;
 
     @Override
     public String toString() {
         return new StringBuffer(
-                "Slot number "+getSlotId()+
-                        " contains commodity: "+getCommodity()
+                "Slot number "+slotId+
+                        " contains commodity: "+commodity
         ).toString();
-    }
-    public long getSlotId() {
-        return slotId;
-    }
-
-    public void setSlotId(long slotId) {
-        this.slotId = slotId;
-    }
-
-    public Shelf getShelf() {
-        return shelf;
-    }
-
-    public void setShelf(Shelf shelf) {
-        this.shelf = shelf;
-    }
-
-    public Commodity getCommodity() {
-        return commodity;
-    }
-
-    public void setCommodity(Commodity commodity) {
-        this.commodity = commodity;
-    }
-
-    public boolean isEmpty() {
-        return isEmpty;
-    }
-
-    public void setEmpty(boolean empty) {
-        isEmpty = empty;
     }
 }

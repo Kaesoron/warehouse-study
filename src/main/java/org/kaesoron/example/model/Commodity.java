@@ -1,72 +1,34 @@
 package org.kaesoron.example.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "commodities")
 public class Commodity {
-    private final long commodityId;
-    private String name;
+
+    @Id
+    @GeneratedValue
+    private long commodityId;
+    @NotBlank
+    private String commodityName;
     private String description;
-    private static String measure;
+    @NotBlank
+    private static Measures measure;
+    @NotBlank
     private int quantity;
-    private int volume;
+    @NotBlank
+    private double volume;
 
     @Override
     public String toString() {
         return new StringBuffer(
-                "ID "+getCommodityId()+
-                        " "+getName()
+                "ID "+commodityId+
+                        " "+commodityName
         ).toString();
     }
 
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    private Slot slot;
-
-    public long getCommodityId() {
-        return commodityId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public static String getMeasure() {
-        return measure;
-    }
-
-    public static void setMeasure(String measure) {
-        Commodity.measure = measure;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Slot getSlot() {
-        return slot;
-    }
-
-    public void setSlot(Slot slot) {
-        this.slot = slot;
-    }
 }
