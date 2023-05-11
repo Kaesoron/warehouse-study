@@ -14,6 +14,6 @@ public class Journal {
     @NotBlank
     @OneToOne
     private Commodity commodity;
+    @Column
     private String operationTime;
-
 }
