@@ -18,9 +18,7 @@ public class Shelf {
 
     @Override
     public String toString() {
-        return new StringBuffer(
-                "Shelf number "+String.valueOf(shelfId)+
-                        " contains slots: %n"+ StringUtils.collectionToDelimitedString(slots, "%n")
-                ).toString();
+        return "Shelf number " + shelfId +
+                " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "%n");
     }
 }

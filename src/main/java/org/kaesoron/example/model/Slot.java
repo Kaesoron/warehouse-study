@@ -18,9 +18,7 @@ public class Slot {
 
     @Override
     public String toString() {
-        return new StringBuffer(
-                "Slot number "+slotId+
-                        " contains commodity: "+commodity
-        ).toString();
+        return "Slot number " + slotId +
+                " contains commodity: " + commodity;
     }
 }

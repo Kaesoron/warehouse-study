@@ -19,11 +19,9 @@ public class Warehouse {
 
     @Override
     public String toString() {
-        return new StringBuffer(
-                "Warehouse  "+warehouseName+
-                        " ID: "+warehouseId+
-                        " description: "+warehouseDescription+
-                        " contains shelves: "+shelves.size()
-        ).toString();
+        return "Warehouse  " + warehouseName +
+                " ID: " + warehouseId +
+                " description: " + warehouseDescription +
+                " contains shelves: " + shelves.size();
     }
 }

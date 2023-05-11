@@ -25,10 +25,8 @@ public class Commodity {
 
     @Override
     public String toString() {
-        return new StringBuffer(
-                "ID "+commodityId+
-                        " "+commodityName
-        ).toString();
+        return "ID " + commodityId +
+                " " + commodityName;
     }
 
 }
