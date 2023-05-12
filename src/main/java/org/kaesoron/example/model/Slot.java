@@ -2,6 +2,7 @@ package org.kaesoron.example.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "slots")
