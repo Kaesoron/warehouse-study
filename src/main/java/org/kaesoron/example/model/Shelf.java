@@ -13,7 +13,7 @@ public class Shelf {
     private long shelfId;
     @ManyToOne(fetch = FetchType.EAGER)
     private Warehouse warehouse;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "slots")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Slot> slots;
 
     @Override

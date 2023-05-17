@@ -14,7 +14,7 @@ public class Warehouse {
     @NotBlank
     private String warehouseName;
     private String warehouseDescription;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shelves")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Shelf> shelves;
 
     @Override
