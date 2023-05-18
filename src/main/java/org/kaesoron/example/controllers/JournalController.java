@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class WarehouseController {
-    @GetMapping ("/warehouse/hello")
+public class JournalController {
+    @GetMapping ("/journal/hello")
     public String helloPage() {
-        return "/warehouse/hello.html";
+        return "/journal/hello.html";
     }
 }
