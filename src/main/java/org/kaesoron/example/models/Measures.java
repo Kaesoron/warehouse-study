@@ -1,4 +1,4 @@
-package org.kaesoron.example.model;
+package org.kaesoron.example.models;
 
 public enum Measures {
     KILOGRAMM,

@@ -1,4 +1,4 @@
-package org.kaesoron.example.model;
+package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
 import org.springframework.util.StringUtils;
