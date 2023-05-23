@@ -29,14 +29,25 @@ public class WarehousesController {
     }
 
     @GetMapping("/new")
-    public String newWarehouse(Model model) {
-        model.addAttribute("warehouse", new Warehouse());
+    public String newWarehouse(@ModelAttribute("warehouse") Warehouse warehouse) {
         return "/warehouses/new";
     }
 
     @PostMapping("")
     public String create(@ModelAttribute("warehouse") Warehouse warehouse) {
         WarehouseDAO.save(warehouse);
+        return "redirect:/warehouses";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("warehouse", warehouseDAO.show(id));
+        return "/warehouses/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("warehouse") Warehouse warehouse, @PathVariable("id") int id) {
+        warehouseDAO.update(id, warehouse);
         return "redirect:/warehouses";
     }
 }

@@ -14,6 +14,8 @@
 <p th:text="${warehouse.getWarehouseId()}"ID</p>
 <p th:text="${warehouse.toString()}"MESSAGE</p>
 <hr>
+<a href = "/warehouses/${warehouse.getWarehouseId()}/edit">Edit current WH</a>
+<hr>
 <a href = "/journals/hello">Check journal</a>
 <a href="/shelves/hello">Shelves of current warehouses</a>
 <a href = "/slots/hello">Slot statistics</a>

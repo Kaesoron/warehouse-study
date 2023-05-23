@@ -3,6 +3,7 @@ package org.kaesoron.example.models;
 import jakarta.persistence.*;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,4 +22,5 @@ public class Shelf {
         return "Shelf number " + shelfId +
                 " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "%n");
     }
+
 }

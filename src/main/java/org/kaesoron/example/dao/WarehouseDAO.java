@@ -30,4 +30,11 @@ public class WarehouseDAO {
         warehouse.setWarehouseId(++whCount);
         warehouses.add(warehouse);
     }
+
+    public void update(int id, Warehouse warehouse) {
+        Warehouse toBeUpdated = show(id);
+        toBeUpdated.setWarehouseName(warehouse.getWarehouseName());
+        toBeUpdated.setWarehouseDescription(warehouse.getWarehouseDescription());
+
+    }
 }

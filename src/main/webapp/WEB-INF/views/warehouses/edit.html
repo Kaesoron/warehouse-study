@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Warehouse update</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/warehouses/{id}(id=${warehouse.getWarehouseId()})}" th:object="${warehouse}">
+    <label for="name">Name</</label>
+    <input type="text" th:field="*{warehouseName}" id="name"/>
+
+    <br>
+
+    <label for="description">Description</</label>
+    <input type="text" th:field="*{warehouseDescription}" id="description"/>
+
+    <br>
+
+    <input type="submit" value="Update warehouse"/>
+</form>
+
+</body>
+</html>
