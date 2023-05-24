@@ -1,8 +1,9 @@
-package org.kaesoron.example.model;
+package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Shelf {
     private long shelfId;
     @ManyToOne(fetch = FetchType.EAGER)
     private Warehouse warehouse;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "slots")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Slot> slots;
 
     @Override
@@ -21,4 +22,5 @@ public class Shelf {
         return "Shelf number " + shelfId +
                 " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "%n");
     }
+
 }

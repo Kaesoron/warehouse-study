@@ -1,8 +1,7 @@
-package org.kaesoron.example.model;
+package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Table(name = "slots")
@@ -12,7 +11,7 @@ public class Slot {
     private long slotId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shelf shelf;
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "commodities")
+    @OneToOne(fetch = FetchType.EAGER)
     private Commodity commodity;
     @NotBlank
     private boolean isEmpty;

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Warehouse page</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<p th:text="${warehouse.getWarehouseName()}">NAME</p>
+<p th:text="${warehouse.getWarehouseId()}">ID</p>
+<p th:text="${warehouse.toString()}">MESSAGE</p>
+
+<hr>
+<form th:method="GET" th:action="@{/warehouses/{id}/edit(id=${warehouse.getWarehouseId()})}">
+    <input type="submit" value="Edit current WH"></form>
+<form th:method="DELETE" th:action="@{/warehouses/{id}/delete(id=${warehouse.getWarehouseId()})}">
+    <input type="submit" value="Delete current WH"></form>
+
+<hr>
+<a href = "/journals/hello">Check journal</a>
+<a href="/shelves/hello">Shelves of current warehouses</a>
+<a href = "/slots/hello">Slot statistics</a>
+<a href = "/commodities/hello">Commodities stored here</a>
+</body>
+</html>
