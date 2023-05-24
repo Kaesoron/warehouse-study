@@ -12,7 +12,7 @@ public class Warehouse {
     @Id
     @GeneratedValue
     private long warehouseId;
-    @NotBlank
+    @NotBlank(message = "Name should not be empty")
     private String warehouseName;
     private String warehouseDescription;
     @OneToMany(fetch = FetchType.LAZY)

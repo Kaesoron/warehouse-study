@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <title>Warehouses list</title>
@@ -14,7 +14,8 @@
     <a th:href="@{/warehouses/{id}(id=${warehouse.getWarehouseId()})}" th:text="${warehouse.getWarehouseName()}">warehouse</a>
 </div>
 <hr>
-<a href = "/warehouses/new">Add new warehouse</a>
+<form th:method="GET" th:action="@{/warehouses/new}">
+    <input type="submit" value="Create new warehouse"></form>
 <hr>
 <a href = "/journals/index">Check journal</a>
 <a href="/shelves/index">Shelves of current warehouses</a>

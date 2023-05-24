@@ -1,9 +1,11 @@
 package org.kaesoron.example.controllers;
 
+import jakarta.validation.Valid;
 import org.kaesoron.example.dao.WarehouseDAO;
 import org.kaesoron.example.models.Warehouse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -22,6 +24,11 @@ public class WarehousesController {
         return "/warehouses/index";
     }
 
+    @GetMapping("/")
+    public String index2(Model model) {
+        return "redirect:/warehouses";
+    }
+
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("warehouse", warehouseDAO.show(id));
@@ -34,7 +41,11 @@ public class WarehousesController {
     }
 
     @PostMapping("")
-    public String create(@ModelAttribute("warehouse") Warehouse warehouse) {
+    public String create(@ModelAttribute("warehouse") @Valid Warehouse warehouse,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "/warehouses/new";
+
         WarehouseDAO.save(warehouse);
         return "redirect:/warehouses";
     }
@@ -45,9 +56,18 @@ public class WarehousesController {
         return "/warehouses/edit";
     }
 
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("warehouse") Warehouse warehouse, @PathVariable("id") int id) {
+    @PostMapping("/{id}")
+    public String update(@ModelAttribute("warehouse") @Valid Warehouse warehouse, BindingResult bindingResult, @PathVariable("id") int id) {
+        if (bindingResult.hasErrors())
+            return "redirect:/warehouses/{id}/edit";
+
         warehouseDAO.update(id, warehouse);
+        return "redirect:/warehouses";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        warehouseDAO.delete(id);
         return "redirect:/warehouses";
     }
 }

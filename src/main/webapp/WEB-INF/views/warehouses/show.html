@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <title>Warehouse page</title>
@@ -11,10 +11,15 @@
 <body>
 
 <p th:text="${warehouse.getWarehouseName()}">NAME</p>
-<p th:text="${warehouse.getWarehouseId()}"ID</p>
-<p th:text="${warehouse.toString()}"MESSAGE</p>
+<p th:text="${warehouse.getWarehouseId()}">ID</p>
+<p th:text="${warehouse.toString()}">MESSAGE</p>
+
 <hr>
-<a href = "/warehouses/${warehouse.getWarehouseId()}/edit">Edit current WH</a>
+<form th:method="GET" th:action="@{/warehouses/{id}/edit(id=${warehouse.getWarehouseId()})}">
+    <input type="submit" value="Edit current WH"></form>
+<form th:method="DELETE" th:action="@{/warehouses/{id}/delete(id=${warehouse.getWarehouseId()})}">
+    <input type="submit" value="Delete current WH"></form>
+
 <hr>
 <a href = "/journals/hello">Check journal</a>
 <a href="/shelves/hello">Shelves of current warehouses</a>

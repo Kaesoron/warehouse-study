@@ -23,7 +23,7 @@ public class WarehouseDAO {
     }
 
     public Warehouse show(int id) {
-        return warehouses.stream().filter(warehouse -> warehouse.getWarehouseId()==id).findAny().orElse(null);
+        return warehouses.stream().filter(warehouse -> warehouse.getWarehouseId() == id).findAny().orElse(null);
     }
 
     public static void save(Warehouse warehouse) {
@@ -36,5 +36,9 @@ public class WarehouseDAO {
         toBeUpdated.setWarehouseName(warehouse.getWarehouseName());
         toBeUpdated.setWarehouseDescription(warehouse.getWarehouseDescription());
 
+    }
+
+    public void delete(int id) {
+        warehouses.removeIf(w -> w.getWarehouseId() == id);
     }
 }
