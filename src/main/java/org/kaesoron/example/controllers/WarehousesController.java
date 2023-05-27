@@ -25,7 +25,7 @@ public class WarehousesController {
     }
 
     @GetMapping("/")
-    public String index2(Model model) {
+    public String index2() {
         return "redirect:/warehouses";
     }
 
@@ -43,10 +43,11 @@ public class WarehousesController {
     @PostMapping("")
     public String create(@ModelAttribute("warehouse") @Valid Warehouse warehouse,
                          BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "/warehouses/new";
+        }
 
-        WarehouseDAO.save(warehouse);
+        warehouseDAO.save(warehouse);
         return "redirect:/warehouses";
     }
 
