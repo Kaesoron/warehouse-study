@@ -21,9 +21,9 @@
     <input type="submit" value="Delete current WH"></form>
 
 <hr>
-<a href = "/journals/hello">Check journal</a>
-<a href="/shelves/hello">Shelves of current warehouses</a>
+<a th:href = "@{/{id}/shelves(id=${warehouse.getWarehouseId()})}">Shelves of current warehouse</a>
 <a href = "/slots/hello">Slot statistics</a>
 <a href = "/commodities/hello">Commodities stored here</a>
+<a href = "/warehouses">Check journal</a>
 </body>
 </html>

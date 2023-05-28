@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Shelf page</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<p th:text="${shelf.getWarehouse().getWarehouseName()}">WAREHOUSE NAME</p>
+<p th:text="${shelf.getWarehouse.getWarehouseId()}">WAREHOUSE ID</p>
+<br>
+<p th:text="${shelf.getShelfId()}">SHELF ID</p>
+<p th:text="${shelf.toString()}">MESSAGE</p>
+
+<hr>
+<form th:method="DELETE" th:action="@{/shelves/{id}/delete/(id=${shelf.getShelfId()})}">
+    <input type="submit" value="Delete current shelf"></form>
+<hr>
+<a href = "/slots/hello">Slot statistics</a>
+<a href = "/commodities/hello">Commodities stored here</a>
+<a href = "/warehouses">Check journal</a>
+</body>
+</html>

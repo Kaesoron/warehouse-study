@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Shelf</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<div th:each="shelf : ${shelves}">
+    <a th:href="@{/shelves/{id}(id=${shelf.getShelfId()})}" th:text="${shelf.getShelfId()}">shelf</a>
+</div>
+<hr>
+<form th:method="POST" action="shelves">
+    <input type="submit" value="Create new shelf for current warehouse"></form>
+<hr>
+<a href = "/warehouses/">Back to warehouses list</a>
+<a href = "/slots/index">Slot statistics</a>
+<a href = "/commodities/index">Commodities stored here</a>
+<a href = "/journals/index">Check journal</a>
+</body>
+</html>

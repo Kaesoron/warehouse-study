@@ -15,12 +15,12 @@ public class Warehouse {
     @NotBlank(message = "Name should not be empty")
     private String warehouseName;
     private String warehouseDescription;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     private List<Shelf> shelves;
 
     @Override
     public String toString() {
-        if (shelves==null) {
+        if (this.getShelves()==null) {
             return "Warehouse  " + warehouseName +
                     ", ID: " + warehouseId +
                     ", description: " + warehouseDescription +
@@ -29,25 +29,8 @@ public class Warehouse {
             return "Warehouse  " + warehouseName +
                     ", ID: " + warehouseId +
                     ", description: " + warehouseDescription +
-                    ", contains shelves: " + shelves.size();
+                    ", contains shelves: " + this.shelves.size();
         }
-    }
-
-    public Warehouse(){
-        this.shelves = new ArrayList<>();
-    }
-
-    public Warehouse(String warehouseName, String warehouseDescription) {
-        this.warehouseName=warehouseName;
-        this.warehouseDescription=warehouseDescription;
-        this.shelves = new ArrayList<>();
-    }
-
-    public Warehouse(int id, String warehouseName, String warehouseDescription) {
-        this.warehouseId=id;
-        this.warehouseName=warehouseName;
-        this.warehouseDescription=warehouseDescription;
-        this.shelves = new ArrayList<>();
     }
 
     public long getWarehouseId() {

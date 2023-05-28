@@ -3,7 +3,6 @@ package org.kaesoron.example.models;
 import jakarta.persistence.*;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,8 +18,28 @@ public class Shelf {
 
     @Override
     public String toString() {
-        return "Shelf number " + shelfId +
+        return "Warehouse " + getWarehouse().getWarehouseName() +
+                " shelf number " + getShelfId() +
                 " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "%n");
     }
 
+    public long getShelfId() {
+        return shelfId;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public List<Slot> getSlots() {
+        return slots;
+    }
+
+    public void setSlots(List<Slot> slots) {
+        this.slots = slots;
+    }
 }
