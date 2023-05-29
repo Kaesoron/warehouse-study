@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+
 @Entity
 @Table(name = "commodities")
 public class Commodity {
@@ -23,6 +25,9 @@ public class Commodity {
     @NotBlank (message = "Volume should not be empty")
     @Min(value = 0, message = "Volume shall be 0 or greater")
     private double volume;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "commodity")
+    private List<Slot> slots;
+
 
     @Override
     public String toString() {

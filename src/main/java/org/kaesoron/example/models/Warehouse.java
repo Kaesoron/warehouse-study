@@ -15,22 +15,15 @@ public class Warehouse {
     @NotBlank(message = "Name should not be empty")
     private String warehouseName;
     private String warehouseDescription;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse")
     private List<Shelf> shelves;
 
     @Override
     public String toString() {
-        if (this.getShelves()==null) {
-            return "Warehouse  " + warehouseName +
-                    ", ID: " + warehouseId +
-                    ", description: " + warehouseDescription +
-                    ", contains shelves: " + 0;
-        } else {
-            return "Warehouse  " + warehouseName +
-                    ", ID: " + warehouseId +
-                    ", description: " + warehouseDescription +
-                    ", contains shelves: " + this.shelves.size();
-        }
+        return "Warehouse  " + warehouseName +
+                ", ID: " + warehouseId +
+                ", description: " + warehouseDescription +
+                ", contains shelves: " + getShelves().size();
     }
 
     public long getWarehouseId() {
@@ -58,10 +51,10 @@ public class Warehouse {
     }
 
     public List<Shelf> getShelves() {
-        return shelves;
+        return this.shelves;
     }
 
-    public void setShelves(List<Shelf> shelves) {
-        this.shelves = shelves;
+    public void addShelf(Shelf shelf) {
+        this.shelves.add(shelf);
     }
 }
