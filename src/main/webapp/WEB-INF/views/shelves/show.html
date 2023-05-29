@@ -10,9 +10,11 @@
 </head>
 <body>
 
+<p>WAREHOUSE NAME AND ID:</p>
 <p th:text="${shelf.getWarehouse().getWarehouseName()}">WAREHOUSE NAME</p>
 <p th:text="${shelf.getWarehouse.getWarehouseId()}">WAREHOUSE ID</p>
 <br>
+<p>SHELF ID AND INFO:</p>
 <p th:text="${shelf.getShelfId()}">SHELF ID</p>
 <p th:text="${shelf.toString()}">MESSAGE</p>
 
@@ -20,8 +22,9 @@
 <form th:method="DELETE" th:action="@{/shelves/{id}/delete/(id=${shelf.getShelfId()})}">
     <input type="submit" value="Delete current shelf"></form>
 <hr>
-<a href = "/slots/hello">Slot statistics</a>
-<a href = "/commodities/hello">Commodities stored here</a>
-<a href = "/warehouses">Check journal</a>
+<a href = "/warehouses/">Back to warehouses list</a>
+<a th:href = "@{/shelves/{id}/slots/(id=${shelf.getShelfId()})}">Slot statistics</a>
+<a href = "/commodities/index">Commodities stored here</a>
+<a href = "/journals/index">Check journal</a>
 </body>
 </html>

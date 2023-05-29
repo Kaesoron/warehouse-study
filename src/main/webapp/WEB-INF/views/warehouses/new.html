@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<p>NEW WAREHOUSE CREATION FORM</p>
 <form th:method="POST" th:action="@{/warehouses}" th:object="${warehouse}">
     <label for="name">Name</label>
     <input type="text" th:field="*{warehouseName}" id="name"/>

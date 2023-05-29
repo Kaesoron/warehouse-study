@@ -2,7 +2,6 @@ package org.kaesoron.example.dao;
 
 import org.kaesoron.example.models.Shelf;
 import org.kaesoron.example.repository.ShelvesRepository;
-import org.kaesoron.example.repository.WarehousesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,6 @@ public class ShelfDAO {
 
     @Autowired
     private ShelvesRepository shelvesRepository;
-
-    @Autowired
-    private WarehousesRepository warehousesRepository;
 
     public List<Shelf> index(long id) {
         return (shelvesRepository.findAll().stream().filter(shelf -> shelf.getWarehouse().getWarehouseId() == id)).toList();

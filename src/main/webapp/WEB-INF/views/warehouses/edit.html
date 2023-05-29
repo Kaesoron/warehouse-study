@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<p>EDIT CURRENT WAREHOUSE</p>
 <form th:method="PATCH" th:action="@{/warehouses/{id}(id=${warehouse.getWarehouseId()})}" th:object="${warehouse}">
     <label for="name">Name</label>
     <input type="text" th:field="*{warehouseName}" id="name"/>

@@ -10,10 +10,10 @@
 </head>
 <body>
 
+<p>WAREHOUSE TITLE PAGE</p>
 <p th:text="${warehouse.getWarehouseName()}">NAME</p>
 <p th:text="${warehouse.getWarehouseId()}">ID</p>
 <p th:text="${warehouse.toString()}">MESSAGE</p>
-<p th:text="${warehouse.getShelves().size()}">SHELVES</p>
 
 <hr>
 <form th:method="GET" th:action="@{/warehouses/{id}/edit(id=${warehouse.getWarehouseId()})}">
@@ -23,7 +23,6 @@
 
 <hr>
 <a th:href = "@{/{id}/shelves(id=${warehouse.getWarehouseId()})}">Shelves of current warehouse</a>
-<a href = "/slots/hello">Slot statistics</a>
 <a href = "/commodities/hello">Commodities stored here</a>
 <a href = "/warehouses">Check journal</a>
 </body>

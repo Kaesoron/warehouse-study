@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Slot page</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<p>WAREHOUSE: </p>
+<p th:text="${slot.getShelf().getWarehouse().getWarehouseName()}">WAREHOUSE NAME</p>
+<p th:text="${slot.getShelf().getWarehouse.getWarehouseId()}">WAREHOUSE ID</p>
+<br>
+<p>SHELF: </p>
+<p th:text="${slot.getShelf().getShelfId()}">SHELF ID</p>
+<br>
+<p>SLOT NUMBER: </p>
+<p th:text="${slot.getSlotId()}">SHELF ID</p>
+<p>IS EMPTY: </p>
+<p th:text="${slot.isEmpty()}">MESSAGE</p>
+
+<hr>
+<form th:method="DELETE" th:action="@{/slots/{id}/delete/(id=${slot.getSlotId()})}">
+    <input type="submit" value="Delete current slot"></form>
+<hr>
+<a href = "/warehouses/">Back to warehouses list</a>
+<a th:href = "@{/{id}/shelves/(id=${slot.getShelf().getWarehouse.getWarehouseId()})}">Shelves statistics</a>
+<a href = "/commodities/index">Commodities stored here</a>
+<a href = "/journals/index">Check journal</a>
+</body>
+</html>

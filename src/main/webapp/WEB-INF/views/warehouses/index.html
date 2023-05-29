@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<p>LIST OF WAREHOUSES:</p>
 <div th:each="warehouse : ${warehouses}">
     <a th:href="@{/warehouses/{id}(id=${warehouse.getWarehouseId()})}" th:text="${warehouse.getWarehouseName()}">warehouse</a>
 </div>
@@ -18,8 +19,6 @@
     <input type="submit" value="Create new warehouse"></form>
 <hr>
 <a href = "/journals/index">Check journal</a>
-<a href="/shelves/index">Shelves of current warehouses</a>
-<a href = "/slots/index">Slot statistics</a>
 <a href = "/commodities/index">Commodities stored here</a>
 </body>
 </html>

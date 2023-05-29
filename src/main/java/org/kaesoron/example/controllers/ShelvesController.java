@@ -7,7 +7,6 @@ import org.kaesoron.example.repository.WarehousesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -50,7 +49,7 @@ public class ShelvesController {
     @PostMapping("/shelves/{id}/delete/")
     public String delete(@PathVariable("id") int id) {
         long whId = shelfDAO.show(id).getWarehouse().getWarehouseId();
-        String whIdText = "/"+String.valueOf(whId)+"/shelves";
+        String whIdText = "/"+whId+"/shelves";
         shelfDAO.delete(id);
         return "redirect:"+whIdText;
     }
