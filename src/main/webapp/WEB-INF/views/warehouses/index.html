@@ -12,7 +12,7 @@
 
 <p>LIST OF WAREHOUSES:</p>
 <div th:each="warehouse : ${warehouses}">
-    <a th:href="@{/warehouses/{id}(id=${warehouse.getWarehouseId()})}" th:text="${warehouse.getWarehouseName()}">warehouse</a>
+    <a th:href="@{/warehouses/{id}(id=${warehouse?.getWarehouseId()})}" th:text="${warehouse?.getWarehouseName()}">warehouse</a>
 </div>
 <hr>
 <form th:method="GET" th:action="@{/warehouses/new}">

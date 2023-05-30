@@ -12,7 +12,7 @@
 
 <p>SHELF LIST:</p>
 <div th:each="shelf : ${shelves}">
-    <a th:href="@{/shelves/{id}(id=${shelf.getShelfId()})}" th:text="${shelf.getShelfId()}">shelf</a>
+    <a th:href="@{/shelves/{id}(id=${shelf?.getShelfId()})}" th:text="${shelf?.getShelfId()}">shelf</a>
 </div>
 <hr>
 <form th:method="POST" action="shelves">

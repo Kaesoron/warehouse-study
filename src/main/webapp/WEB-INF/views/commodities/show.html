@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Commodity page</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<p>COMMODITY TITLE PAGE</p>
+<br>
+<p>COMMODITY ID: </p>
+<p th:text="${commodity.getCommodityId()}">NAME</p>
+<br>
+<p>COMMODITY NAME: </p>
+<p th:text="${commodity.getCommodityName()}">NAME</p>
+<br>
+<p>COMMODITY DESCRIPTION: </p>
+<p th:text="${commodity.getDescription()}">ID</p>
+<br>
+<p>STORED AT:</p>
+<p th:text="${commodity.getSlot().toString() + ', Shelf number ' + commodity.getSlot().getShelf().getShelfId() + ', Warehouse' +
+commodity.getSlot().getShelf().getWarehouse().getWarehouseName()}">MESSAGE</p>
+
+<hr>
+<form th:method="GET" th:action="@{/commodities/{id}/edit(id=${commodity.getCommodityId()})}">
+    <input type="submit" value="Edit current commodity"></form>
+<form th:method="DELETE" th:action="@{/commodities/{id}/delete(id=${commodity.getCommodityId()})}">
+    <input type="submit" value="Withdraw current commodity"></form>
+
+<hr>
+<a th:href = "@{/{id}/shelves(id=${commodity.getSlot().getShelf().getWarehouse().getWarehouseId()})}">Shelves of current warehouse</a>
+<a th:href = "@{/shelves/{id}/slots(id=${commodity.getSlot().getShelf().getShelfId()})}">Other slots of current shelf</a>
+<a href = "/warehouses">Check journal</a>
+</body>
+</html>

@@ -12,7 +12,7 @@
 
 <p>SLOTS OF CURRENT SHELF:</p>
 <div th:each="slot : ${slots}">
-    <a th:href="@{/slots/{id}(id=${slot.getSlotId()})}" th:text="${slot.getSlotId()}">slot</a>
+    <a th:href="@{/slots/{id}(id=${slot?.getSlotId()})}" th:text="${slot?.getSlotId()}">slot</a>
 </div>
 <hr>
 <form th:method="POST" action="slots">
