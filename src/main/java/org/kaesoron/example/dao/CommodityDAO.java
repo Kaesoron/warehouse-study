@@ -1,18 +1,15 @@
 package org.kaesoron.example.dao;
 
-import org.kaesoron.example.models.Commodity;
-import org.kaesoron.example.models.Shelf;
-import org.kaesoron.example.models.Slot;
-import org.kaesoron.example.repository.CommodityRepository;
-import org.kaesoron.example.repository.ShelvesRepository;
-import org.kaesoron.example.repository.SlotRepository;
-import org.kaesoron.example.repository.WarehousesRepository;
+import org.kaesoron.example.models.*;
+import org.kaesoron.example.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static org.kaesoron.example.models.OperationType.*;
 
 @Service
 public class CommodityDAO {
@@ -25,6 +22,8 @@ public class CommodityDAO {
     private ShelvesRepository shelvesRepository;
     @Autowired
     private WarehousesRepository warehousesRepository;
+    @Autowired
+    private JournalRepository journalRepository;
 
     public List<Commodity> index() {
         return commodityRepository.findAll();
@@ -62,29 +61,25 @@ public class CommodityDAO {
 
     public void save(Commodity commodity) {
         commodityRepository.save(commodity);
+        journalRepository.save(new Journal(INCOMING, commodity));
     }
 
-    public void update(int id, Commodity commodity) {
+    public void update(long id, Commodity commodity) {
         Commodity toBeUpdated = show(id);
         toBeUpdated.getSlot().setEmpty(true);
         toBeUpdated.setCommodityName(commodity.getCommodityName());
         toBeUpdated.setDescription(commodity.getDescription());
         toBeUpdated.setSlot(commodity.getSlot());
+        journalRepository.save(new Journal(UPDATE, Objects.requireNonNull(commodityRepository.getReferenceById(id))));
     }
 
     public void delete(long id) {
+        journalRepository.save(new Journal(OUTCOMING, Objects.requireNonNull(commodityRepository.getReferenceById(id))));
+        slotRepository.getReferenceById(commodityRepository.getReferenceById(id).getSlot().getSlotId()).setEmpty(true);
         commodityRepository.delete(Objects.requireNonNull(commodityRepository.getReferenceById(id)));
     }
 
     public List<Slot> getFreeSlots() {
         return slotRepository.findAll().stream().filter(slot -> slot.isEmpty()).toList();
-    }
-
-    public void setSlotAvailable(Commodity commodity){
-        commodity.getSlot().setEmpty(true);
-    }
-
-    public void setSlotNotAvailable(Commodity commodity){
-        commodity.getSlot().setEmpty(false);
     }
 }

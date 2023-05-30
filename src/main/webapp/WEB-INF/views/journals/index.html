@@ -10,15 +10,13 @@
 </head>
 <body>
 
-<p>LIST OF COMMODITIES:</p>
-<div th:each="commodity : ${commodities}">
-    <a th:href="@{/commodities/{id}(id=${commodity?.getCommodityId()})}" th:text="${commodity?.getCommodityName()}">commodity</a>
+<p>JOURNAL OF CURRENT UNIT:</p>
+<div th:each="journal : ${journals}">
+    <p th:text="${journal?.getOperationId() +', '+
+    journal?.getOperationTime() +', '+journal?.getCommodity() +', '+journal?.getOperationType()}">journal</p>
 </div>
+<br>
 <hr>
-<form th:method="GET" th:action="@{/commodities/new}">
-    <input type="submit" value="Create new commodity"></form>
-<hr>
-<a href = "/journals">Check journal</a>
 <a href = "/warehouses">Warehouses list</a>
 </body>
 </html>

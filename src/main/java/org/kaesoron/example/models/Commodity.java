@@ -1,7 +1,9 @@
 package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 
 @Entity
@@ -11,12 +13,14 @@ public class Commodity {
     @Id
     @GeneratedValue
     private long commodityId;
-    @NotBlank (message = "Name should not be empty")
+    @Size(min=1, message = "Name should not be empty")
     private String commodityName;
     @Column
     private String description;
     @OneToOne(fetch = FetchType.LAZY)
     private Slot slot;
+    @OneToMany(mappedBy = "commodity")
+    private List<Journal> journal;
 
     @Override
     public String toString() {

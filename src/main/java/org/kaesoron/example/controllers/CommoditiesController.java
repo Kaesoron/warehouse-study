@@ -2,7 +2,6 @@ package org.kaesoron.example.controllers;
 
 import jakarta.validation.Valid;
 import org.kaesoron.example.dao.CommodityDAO;
-import org.kaesoron.example.dao.SlotDAO;
 import org.kaesoron.example.models.Commodity;
 import org.kaesoron.example.models.Slot;
 import org.springframework.stereotype.Controller;
@@ -74,7 +73,7 @@ public class CommoditiesController {
             return "/commodities/new";
         }
         commodityDAO.save(commodity);
-        return "redirect:/commodities";
+        return "/commodities/index";
     }
     //Edit of existing commodity (hyperlink)
     @GetMapping("/commodities/{id}/edit")
@@ -92,7 +91,7 @@ public class CommoditiesController {
         return "redirect:/commodities";
     }
     //Deletion of existing commodity button
-    @PostMapping("/{id}/delete")
+    @PostMapping("/commodities/{id}/delete")
     public String delete(@PathVariable("id") int id) {
         commodityDAO.delete(id);
         return "redirect:/commodities";
