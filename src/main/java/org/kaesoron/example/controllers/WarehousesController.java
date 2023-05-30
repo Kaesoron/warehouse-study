@@ -57,7 +57,7 @@ public class WarehousesController {
         return "/warehouses/edit";
     }
     //Update of existing WH button (check for errors and update)
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/edit")
     public String update(@ModelAttribute("warehouse") @Valid Warehouse warehouse, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "redirect:/warehouses/{id}/edit";

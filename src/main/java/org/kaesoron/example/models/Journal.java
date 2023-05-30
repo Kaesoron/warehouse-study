@@ -10,9 +10,10 @@ public class Journal {
     @Id
     @GeneratedValue
     private long operationId;
+    @Column
     private OperationType operationType;
-    @ManyToOne
-    private Commodity commodity;
+    @Column
+    private String commodityName;
     @Column
     private String operationTime;
 
@@ -32,12 +33,12 @@ public class Journal {
         this.operationType = operationType;
     }
 
-    public String getCommodity() {
-        return commodity.getCommodityName();
+    public String getCommodityName() {
+        return commodityName;
     }
 
-    public void setCommodity(Commodity commodity) {
-        this.commodity = commodity;
+    public void setCommodityName(String newName) {
+        this.commodityName = newName;
     }
 
     public String getOperationTime() {
@@ -51,9 +52,9 @@ public class Journal {
     public Journal(){
         this.setOperationTime(new Date().toString());
     }
-    public Journal(OperationType type, Commodity commodity) {
+    public Journal(OperationType type, String newName) {
         this.setOperationTime(new Date().toString());
         this.setOperationType(type);
-        this.setCommodity(commodity);
+        this.setCommodityName(newName);
     }
 }

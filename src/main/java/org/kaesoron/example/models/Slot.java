@@ -10,7 +10,7 @@ public class Slot {
     private long slotId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shelf shelf;
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "slot")
+    @OneToOne(fetch = FetchType.EAGER)
     private Commodity commodity;
 
     private boolean isEmpty = true;

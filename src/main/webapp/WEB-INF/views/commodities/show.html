@@ -28,7 +28,7 @@ commodity.getSlot().getShelf().getWarehouse().getWarehouseName()}">MESSAGE</p>
 <hr>
 <form th:method="GET" th:action="@{/commodities/{id}/edit(id=${commodity.getCommodityId()})}">
     <input type="submit" value="Edit current commodity"></form>
-<form th:method="DELETE" th:action="@{/commodities/{id}/delete(id=${commodity.getCommodityId()})}">
+<form th:method="POST" th:action="@{/commodities/{id}/delete(id=${commodity.getCommodityId()})}">
     <input type="submit" value="Withdraw current commodity"></form>
 
 <hr>

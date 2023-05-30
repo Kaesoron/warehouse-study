@@ -13,7 +13,7 @@
 <p>JOURNAL OF CURRENT UNIT:</p>
 <div th:each="journal : ${journals}">
     <p th:text="${journal?.getOperationId() +', '+
-    journal?.getOperationTime() +', '+journal?.getCommodity() +', '+journal?.getOperationType()}">journal</p>
+    journal?.getOperationTime() +', '+journal?.getCommodityName() +', '+journal?.getOperationType()}">journal</p>
 </div>
 <br>
 <hr>

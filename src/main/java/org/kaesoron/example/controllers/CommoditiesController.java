@@ -82,7 +82,7 @@ public class CommoditiesController {
         return "/commodities/edit";
     }
     //Update of existing commodity button (check for errors and update)
-    @PostMapping("/commodities/{id}")
+    @PostMapping("/commodities/{id}/edit")
     public String update(@ModelAttribute("commodity") @Valid Commodity commodity, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "redirect:/commodities/{id}/edit";

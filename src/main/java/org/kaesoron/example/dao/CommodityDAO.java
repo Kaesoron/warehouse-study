@@ -4,6 +4,7 @@ import org.kaesoron.example.models.*;
 import org.kaesoron.example.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,18 +27,23 @@ public class CommodityDAO {
     private JournalRepository journalRepository;
 
     public List<Commodity> index() {
-        return commodityRepository.findAll();
+        return commodityRepository.findAll().stream().filter(Commodity::isPresent).toList();
     }
 
     public Commodity indexSlot(long id) {
-        return slotRepository.getReferenceById(id).getCommodity();
+        if (!slotRepository.getReferenceById(id).isEmpty()) {
+            return slotRepository.getReferenceById(id).getCommodity();
+        } else return null;
     }
 
     public List<Commodity> indexShelf(long id) {
         List<Slot> slots = shelvesRepository.getReferenceById(id).getSlots();
         List<Commodity> commodities = new ArrayList<>();
         for (Slot slot : slots) {
-            commodities.add(slot.getCommodity());
+            Commodity commodity = slot.getCommodity();
+            if (commodity!=null && commodity.isPresent()){
+                commodities.add(slot.getCommodity());
+            }
         }
         return commodities;
     }
@@ -50,7 +56,10 @@ public class CommodityDAO {
         }
         List<Commodity> commodities = new ArrayList<>();
         for (Slot slot : slots) {
-            commodities.add(slot.getCommodity());
+            Commodity commodity = slot.getCommodity();
+            if (commodity!=null && commodity.isPresent()){
+                commodities.add(slot.getCommodity());
+            }
         }
         return commodities;
     }
@@ -58,27 +67,34 @@ public class CommodityDAO {
     public Commodity show(long id) {
         return commodityRepository.findById(id).orElse(null);
     }
-
+    @Transactional
     public void save(Commodity commodity) {
+        commodity.setPresent(true);
         commodityRepository.save(commodity);
-        journalRepository.save(new Journal(INCOMING, commodity));
+        journalRepository.save(new Journal(INCOMING, commodity.getCommodityName()));
     }
-
+    @Transactional
     public void update(long id, Commodity commodity) {
         Commodity toBeUpdated = show(id);
-        toBeUpdated.getSlot().setEmpty(true);
         toBeUpdated.setCommodityName(commodity.getCommodityName());
         toBeUpdated.setDescription(commodity.getDescription());
-        toBeUpdated.setSlot(commodity.getSlot());
-        journalRepository.save(new Journal(UPDATE, Objects.requireNonNull(commodityRepository.getReferenceById(id))));
+        journalRepository.save(new Journal(UPDATE, show(id).getCommodityName()+" NAME CHANGED TO: "+Objects.requireNonNull(commodityRepository.getReferenceById(id)).getCommodityName()));
+        commodityRepository.save(toBeUpdated);
     }
-
+    @Transactional
     public void delete(long id) {
-        journalRepository.save(new Journal(OUTCOMING, Objects.requireNonNull(commodityRepository.getReferenceById(id))));
-        slotRepository.getReferenceById(commodityRepository.getReferenceById(id).getSlot().getSlotId()).setEmpty(true);
-        commodityRepository.delete(Objects.requireNonNull(commodityRepository.getReferenceById(id)));
+        if (!commodityRepository.getReferenceById(id).isPresent()) {
+            return;
+        }
+        Slot slot = commodityRepository.getReferenceById(id).getSlot();
+        slot.setEmpty(true);
+        slot.setCommodity(null);
+        slotRepository.save(slot);
+        commodityRepository.getReferenceById(id).setPresent(false);
+        commodityRepository.getReferenceById(id).setSlot(null);
+        journalRepository.save(new Journal(OUTCOMING, Objects.requireNonNull(commodityRepository.getReferenceById(id)).getCommodityName()));
     }
-
+    @Transactional
     public List<Slot> getFreeSlots() {
         return slotRepository.findAll().stream().filter(slot -> slot.isEmpty()).toList();
     }

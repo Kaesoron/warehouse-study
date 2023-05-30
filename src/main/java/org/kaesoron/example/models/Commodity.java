@@ -19,8 +19,12 @@ public class Commodity {
     private String description;
     @OneToOne(fetch = FetchType.LAZY)
     private Slot slot;
-    @OneToMany(mappedBy = "commodity")
+
+    @OneToMany
     private List<Journal> journal;
+
+    @Column
+    private boolean isPresent;
 
     @Override
     public String toString() {
@@ -52,12 +56,19 @@ public class Commodity {
         this.description = description;
     }
 
+    public boolean isPresent() {
+        return isPresent;
+    }
+
+    public void setPresent(boolean present) {
+        isPresent = present;
+    }
+
     public Slot getSlot() {
         return slot;
     }
 
     public void setSlot(Slot slot) {
-        slot.setEmpty(false);
         this.slot=slot;
     }
 }
