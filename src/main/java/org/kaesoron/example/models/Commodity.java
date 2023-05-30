@@ -1,10 +1,8 @@
 package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.List;
 
 @Entity
 @Table(name = "commodities")
@@ -17,17 +15,8 @@ public class Commodity {
     private String commodityName;
     @Column
     private String description;
-    @NotBlank (message = "Measure should not be empty")
-    private static Measures measure;
-    @NotBlank (message = "Quantity should not be empty")
-    @Min(value = 0, message = "Quantity shall be 0 or greater")
-    private int quantity;
-    @NotBlank (message = "Volume should not be empty")
-    @Min(value = 0, message = "Volume shall be 0 or greater")
-    private double volume;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "commodity")
-    private List<Slot> slots;
-
+    @OneToOne(fetch = FetchType.LAZY)
+    private Slot slot;
 
     @Override
     public String toString() {
@@ -35,4 +24,36 @@ public class Commodity {
                 " " + commodityName;
     }
 
+    public long getCommodityId() {
+        return commodityId;
+    }
+
+    public void setCommodityId(long commodityId) {
+        this.commodityId = commodityId;
+    }
+
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Slot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slot slot) {
+        slot.setEmpty(false);
+        this.slot=slot;
+    }
 }

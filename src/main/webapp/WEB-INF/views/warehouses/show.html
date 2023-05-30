@@ -23,7 +23,7 @@
 
 <hr>
 <a th:href = "@{/{id}/shelves(id=${warehouse.getWarehouseId()})}">Shelves of current warehouse</a>
-<a href = "/commodities/hello">Commodities stored here</a>
+<a th:href = "@{/{id}/commodities(id=${warehouse.getWarehouseId()})}">Commodities stored here</a>
 <a href = "/warehouses">Check journal</a>
 </body>
 </html>

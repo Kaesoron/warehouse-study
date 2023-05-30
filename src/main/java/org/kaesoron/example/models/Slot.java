@@ -1,7 +1,6 @@
 package org.kaesoron.example.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "slots")
@@ -11,7 +10,7 @@ public class Slot {
     private long slotId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shelf shelf;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "slot")
     private Commodity commodity;
 
     private boolean isEmpty = true;

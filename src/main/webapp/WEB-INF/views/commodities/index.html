@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Commodities list</title>
+    <style>
+        article, aside, details, figcaption, figure, footer,header,
+        hgroup, menu, nav, section { display: block; }
+    </style>
+</head>
+<body>
+
+<p>LIST OF COMMODITIES:</p>
+<div th:each="commodity : ${commodities}">
+    <a th:href="@{/commodities/{id}(id=${commodity?.getCommodityId()})}" th:text="${commodity?.getCommodityName()}">commodity</a>
+</div>
+<hr>
+<form th:method="GET" th:action="@{/commodities/new}">
+    <input type="submit" value="Create new commodity"></form>
+<hr>
+<a href = "/journals/index">Check journal</a>
+<a href = "/warehouses">Warehouses list</a>
+</body>
+</html>

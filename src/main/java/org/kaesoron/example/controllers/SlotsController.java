@@ -65,7 +65,7 @@ public class SlotsController {
     @PostMapping("slots/{id}/delete/")
     public String delete(@PathVariable("id") int id) {
         long shelfId = slotDAO.show(id).getShelf().getShelfId();
-        String shelfIdText = "shelves/"+shelfId+"/slots";
+        String shelfIdText = "/shelves/"+shelfId+"/slots";
         slotDAO.delete(id);
         return "redirect:"+shelfIdText;
     }

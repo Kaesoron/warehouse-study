@@ -34,4 +34,12 @@ public class SlotDAO {
     public void delete(long id) {
         slotRepository.delete(Objects.requireNonNull(slotRepository.getReferenceById(id)));
     }
+
+    public void setAvailable(Slot slot){
+        slot.setEmpty(true);
+    }
+
+    public void setNotAvailable(Slot slot){
+        slot.setEmpty(false);
+    }
 }

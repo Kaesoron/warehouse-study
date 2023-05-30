@@ -20,7 +20,7 @@ public class Shelf {
     public String toString() {
         return "Warehouse " + getWarehouse().getWarehouseName() +
                 " shelf number " + getShelfId() +
-                " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "%n");
+                " contains slots: %n" + StringUtils.collectionToDelimitedString(slots, "\n");
     }
 
     public long getShelfId() {

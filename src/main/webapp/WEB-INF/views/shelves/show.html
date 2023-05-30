@@ -24,7 +24,7 @@
 <hr>
 <a href = "/warehouses/">Back to warehouses list</a>
 <a th:href = "@{/shelves/{id}/slots/(id=${shelf.getShelfId()})}">Slot statistics</a>
-<a href = "/commodities/index">Commodities stored here</a>
+<a th:href = "@{/shelves/{id}/commodities(id=${shelf.getShelfId()})}">Commodities stored here</a>
 <a href = "/journals/index">Check journal</a>
 </body>
 </html>
