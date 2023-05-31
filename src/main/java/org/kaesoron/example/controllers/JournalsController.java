@@ -1,6 +1,5 @@
 package org.kaesoron.example.controllers;
 
-import org.kaesoron.example.dao.CommodityDAO;
 import org.kaesoron.example.dao.JournalDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

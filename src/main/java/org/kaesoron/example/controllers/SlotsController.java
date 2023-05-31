@@ -46,12 +46,6 @@ public class SlotsController {
         model.addAttribute("slot", slotDAO.show(id));
         return "/slots/show";
     }
-    //Edit of existing slot (hyperlink)
-    @GetMapping("slots/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("slot", slotDAO.show(id));
-        return "/slots/edit";
-    }
     //Update of existing WH button (check for errors and update)
     @PostMapping("slots/{id}")
     public String update(@ModelAttribute("slot") @Valid Slot slot, BindingResult bindingResult, @PathVariable("id") int id) {

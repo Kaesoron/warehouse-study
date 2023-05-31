@@ -83,9 +83,6 @@ public class CommodityDAO {
     }
     @Transactional
     public void delete(long id) {
-        if (!commodityRepository.getReferenceById(id).isPresent()) {
-            return;
-        }
         Slot slot = commodityRepository.getReferenceById(id).getSlot();
         slot.setEmpty(true);
         slot.setCommodity(null);
@@ -96,6 +93,6 @@ public class CommodityDAO {
     }
     @Transactional
     public List<Slot> getFreeSlots() {
-        return slotRepository.findAll().stream().filter(slot -> slot.isEmpty()).toList();
+        return slotRepository.findAll().stream().filter(Slot::isEmpty).toList();
     }
 }
