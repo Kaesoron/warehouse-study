@@ -22,7 +22,7 @@
 <p th:text="${commodity.getDescription()}">ID</p>
 <br>
 <p>STORED AT:</p>
-<p th:text="${commodity.getSlot().toString() + ', Shelf number ' + commodity.getSlot().getShelf().getShelfId() + ', Warehouse' +
+<p th:text="${commodity.getSlot().toString() + ', Shelf number ' + commodity.getSlot().getShelf().getShelfId() + ', Warehouse ' +
 commodity.getSlot().getShelf().getWarehouse().getWarehouseName()}">MESSAGE</p>
 
 <hr>

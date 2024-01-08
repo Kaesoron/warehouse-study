@@ -23,7 +23,7 @@
 
     <br>
 
-    <select th:field="*{slot}" id="slot" name="slot">
+    <select th:field="*{slot}" id="slot" name="slot" th:value="${slot}">
         <option value="">Select slot for storage</option>
         <option
                 th:each="option : ${freeSlots}"

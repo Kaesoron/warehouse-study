@@ -2,6 +2,7 @@ package org.kaesoron.example.controllers;
 
 import jakarta.validation.Valid;
 import org.kaesoron.example.dao.CommodityDAO;
+import org.kaesoron.example.dao.SlotDAO;
 import org.kaesoron.example.models.Commodity;
 import org.kaesoron.example.models.Slot;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping()
 public class CommoditiesController {
     private final CommodityDAO commodityDAO;
+    private final SlotDAO slotDAO;
 
-    public CommoditiesController(CommodityDAO commodityDAO) {
+    public CommoditiesController(CommodityDAO commodityDAO, SlotDAO slotDAO) {
         this.commodityDAO = commodityDAO;
+        this.slotDAO = slotDAO;
     }
     //Total list of commodities
     @GetMapping("/commodities")
@@ -68,11 +71,13 @@ public class CommoditiesController {
     //Button for new commodity save
     @PostMapping("/commodities")
     public String create(@ModelAttribute("commodity") @Valid Commodity commodity,
+                         @ModelAttribute("slot") long slot,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/commodities/new";
         }
-        commodityDAO.save(commodity);
+        commodityDAO.save(commodity, slot);
+        slotDAO.setSlotForCommodity(commodity, slot);
         return "/commodities/index";
     }
     //Edit of existing commodity (hyperlink)
@@ -86,7 +91,6 @@ public class CommoditiesController {
     public String update(@ModelAttribute("commodity") @Valid Commodity commodity, BindingResult bindingResult, @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "redirect:/commodities/{id}/edit";
-
         commodityDAO.update(id, commodity);
         return "redirect:/commodities";
     }

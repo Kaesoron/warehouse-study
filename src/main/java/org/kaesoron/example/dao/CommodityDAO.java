@@ -68,10 +68,14 @@ public class CommodityDAO {
         return commodityRepository.findById(id).orElse(null);
     }
     @Transactional
-    public void save(Commodity commodity) {
+    public void save(Commodity commodity, long slot) {
         commodity.setPresent(true);
+        commodity.setSlot(slotRepository.getReferenceById(slot));
         commodityRepository.save(commodity);
         journalRepository.save(new Journal(INCOMING, commodity.getCommodityName()));
+        Slot slotToPlace = slotRepository.getReferenceById(slot);
+        slotToPlace.setEmpty(false);
+        slotToPlace.setCommodity(commodity);
     }
     @Transactional
     public void update(long id, Commodity commodity) {

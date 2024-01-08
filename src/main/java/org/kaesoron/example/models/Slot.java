@@ -10,15 +10,14 @@ public class Slot {
     private long slotId;
     @ManyToOne(fetch = FetchType.LAZY)
     private Shelf shelf;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne()
     private Commodity commodity;
 
     private boolean isEmpty = true;
 
     @Override
     public String toString() {
-        return "Slot number " + slotId +
-                " contains commodity: " + commodity;
+        return "Slot number " + slotId;
     }
 
     public long getSlotId() {

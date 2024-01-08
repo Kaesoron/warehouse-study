@@ -17,7 +17,7 @@ public class Commodity {
     private String commodityName;
     @Column
     private String description;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     private Slot slot;
 
     @OneToMany

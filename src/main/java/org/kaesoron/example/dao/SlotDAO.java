@@ -1,5 +1,6 @@
 package org.kaesoron.example.dao;
 
+import org.kaesoron.example.models.Commodity;
 import org.kaesoron.example.models.Slot;
 import org.kaesoron.example.repository.SlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class SlotDAO {
     public void update(int id, Slot slot) {
         Slot toBeUpdated = show(id);
         toBeUpdated.setCommodity(slot.getCommodity());
+    }
+    public void setSlotForCommodity(Commodity commodity, long slot) {
+        Slot toBeUpdated = slotRepository.getReferenceById(slot);
+        toBeUpdated.setCommodity(commodity);
+        toBeUpdated.setEmpty(false);
     }
     @Transactional
     public void delete(long id) {
